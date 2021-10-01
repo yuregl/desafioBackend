@@ -1,9 +1,16 @@
- import { Router, Response, Request } from 'express';
+import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
 
- const routes = Router();
+import { createProductsRouter } from './ProductsRoutes';
 
- routes.get('/teste', (_: Request, res: Response) => {
-   res.send({message: 'teste'});
- });
+async function exportApp(){
+  const app = express(); 
+  app.use(morgan('dev'));
+  app.use(cors());
+  app.use(express.json());
+  app.use(createProductsRouter());
+  return app;
+}
 
-export { routes };
+export { exportApp }
