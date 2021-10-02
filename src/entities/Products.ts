@@ -4,7 +4,7 @@ import { Entity, PrimaryColumn, Column } from "typeorm";
 class Products {
 
   @PrimaryColumn()
-  readonly id: string;
+  readonly id: number;
 
   @Column()
   nameProduct: string;
