@@ -3,25 +3,22 @@ import { ProductsRepositories } from "../repositories/ProductsRepositories";
 
 interface IProductRequest {
   nameProduct: string;
-  imageUri: string;
+  destination: string;
   quantity: number;
   priceProduct: number;
 }
 
 class ProductsService {
 
-  constructor(private productsRespositories: ProductsRepositories){
-
-  }
+  constructor(private productsRespositories: ProductsRepositories){}
 
   async executelistProducts() {
-    // const productsRepositories = getCustomRepository(ProductsRepositories);
     const products = this.productsRespositories.find();
     return products;
   }
 
   async executeCreateProducts(req: IProductRequest) {
-    const { nameProduct, imageUri, quantity , priceProduct} = req;
+    const { nameProduct, destination, quantity , priceProduct} = req;
     const productsRepositories = getCustomRepository(ProductsRepositories);
     const productAlreadyExist = await productsRepositories.findOne({
       nameProduct
@@ -33,7 +30,7 @@ class ProductsService {
 
     const product = productsRepositories.create({
       nameProduct,
-      imageUri,
+      imageUri: destination,
       quantity,
       priceProduct
     });
