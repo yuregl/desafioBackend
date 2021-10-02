@@ -19,8 +19,7 @@ class ProductsService {
 
   async executeCreateProducts(req: IProductRequest) {
     const { nameProduct, destination, quantity , priceProduct} = req;
-    const productsRepositories = getCustomRepository(ProductsRepositories);
-    const productAlreadyExist = await productsRepositories.findOne({
+    const productAlreadyExist = await this.productsRespositories.findOne({
       nameProduct
     });
 
@@ -28,14 +27,14 @@ class ProductsService {
       throw new Error('Produto já existe');
     }
 
-    const product = productsRepositories.create({
+    const product = this.productsRespositories.create({
       nameProduct,
       imageUri: destination,
       quantity,
       priceProduct
     });
     
-    await productsRepositories.save(product);
+    await this.productsRespositories.save(product);
 
     return product;
   }
