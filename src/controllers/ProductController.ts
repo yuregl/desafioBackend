@@ -11,9 +11,9 @@ class ProductController {
   }
 
   handleCreateProduct = async (request: Request, response: Response) => {
-    const {  nameProduct, imageUri, quantity , priceProduct } = request.body;
+    const {  nameProduct, quantity , priceProduct } = request.body;
     const product = await this.productService.executeCreateProducts({
-      nameProduct, imageUri, quantity , priceProduct
+      nameProduct, destination: request.destination, quantity , priceProduct
     }); 
     return response.json(product);
   }
