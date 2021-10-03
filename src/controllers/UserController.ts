@@ -12,6 +12,12 @@ class UserController {
     });
     return response.json(user);
   }
+
+  handleLogin = async(request: Request, response: Response) => {
+    const { email , senha } = request.body;
+    const token = await this.userService.executeLogin({email, senha});
+    return response.json(token);
+  }
 }
 
 export { UserController }
