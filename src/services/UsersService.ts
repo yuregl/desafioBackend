@@ -1,5 +1,7 @@
-import { getCustomRepository } from 'typeorm';
+import jwt from 'jsonwebtoken';
+
 import { UsersRepositories } from '../repositories/UsersRepositories';
+import { comparePassword } from '../util/EncryptPassWord';
 
 interface IUser {
   email: string;
@@ -28,6 +30,27 @@ class UsersService {
     await this.usersRepositories.save(user);
 
     return user;
+  }
+
+  async executeLogin(req: IUser){
+    const { email, senha } = req;
+
+    const userAlreadyExist = await this.usersRepositories.findOne({
+      email,
+    })
+
+    if(!userAlreadyExist){
+      throw new Error('Esse email nao existe');
+    }
+
+    const password = await comparePassword(senha, userAlreadyExist.senha);
+    if(!password){
+      throw new Error('Senha incorreta');
+    } 
+
+    const token = jwt.sign({ email }, <string>process.env.SECRET, {expiresIn: '1d'});
+
+    return token;
   }
 }
 
