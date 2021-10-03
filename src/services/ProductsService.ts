@@ -1,10 +1,8 @@
-import { getCustomRepository } from "typeorm"
 import { ProductsRepositories } from "../repositories/ProductsRepositories";
 
 interface IProductRequest {
   nameProduct: string;
   destination: string;
-  quantity: number;
   priceProduct: number;
 }
 
@@ -18,7 +16,7 @@ class ProductsService {
   }
 
   async executeCreateProducts(req: IProductRequest) {
-    const { nameProduct, destination, quantity , priceProduct} = req;
+    const { nameProduct, destination, priceProduct} = req;
     const productAlreadyExist = await this.productsRespositories.findOne({
       nameProduct
     });
@@ -30,7 +28,6 @@ class ProductsService {
     const product = this.productsRespositories.create({
       nameProduct,
       imageUri: destination,
-      quantity,
       priceProduct
     });
     
