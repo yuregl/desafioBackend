@@ -14,6 +14,7 @@ function createUsersRoutes(){
   const usersController = new UserController(usersService);
 
   routesUser.post('/create_user', hashPassword ,usersController.handleCreateUser);
+  routesUser.post('/login', usersController.handleLogin);
 
   return routesUser;
 }
