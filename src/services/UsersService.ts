@@ -50,7 +50,13 @@ class UsersService {
 
     const token = jwt.sign({ email }, <string>process.env.SECRET, {expiresIn: '1d'});
 
-    return token;
+    const userWithToken ={
+      email,
+      id: userAlreadyExist.id,
+      token
+    }
+
+    return userWithToken;
   }
 }
 
