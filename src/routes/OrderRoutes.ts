@@ -5,6 +5,7 @@ import { OrdersService } from '../services/OrdersService';
 import { ProductsOrderService } from '../services/ProductOrderService';
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
+import verifyAuth from '../util/AuthMiddlewae';
 
 const routesOrder = Router();
 
@@ -17,7 +18,7 @@ function createOrderRoutes() {
 
   const productsController = new OrderController(orderService, productsOrderService)
 
-  routesOrder.post('/order', productsController.handleCreateOrder);
+  routesOrder.post('/order', verifyAuth ,productsController.handleCreateOrder);
   return routesOrder;
 }
 
