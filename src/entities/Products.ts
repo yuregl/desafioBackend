@@ -12,9 +12,6 @@ class Products {
   @Column()
   imageUri: string;
 
-  @Column()
-  quantity: number;
-
   @Column("decimal", { precision: 2})
   priceProduct: number;
 }
