@@ -20,10 +20,6 @@ export class CreateTableProdutos1632877580626 implements MigrationInterface {
             type: 'float',
           },
           {
-            name: 'quantity',
-            type: 'int',
-          },
-          {
             name: 'id',
             type: 'int',
             isPrimary: true,
