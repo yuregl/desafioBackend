@@ -31,9 +31,8 @@ class ProductsService {
       priceProduct
     });
     
-    await this.productsRespositories.save(product);
-
-    return product;
+    
+    return await this.productsRespositories.save(product);
   }
 }
 
