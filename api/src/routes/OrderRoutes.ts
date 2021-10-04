@@ -1,6 +1,6 @@
 import { OrderController } from '../controllers/OrderController';
 import { OrdersRepositories } from '../repositories/OrderRespositories';
-import { ProductsOrderRepositories } from '../repositories/ProductsOrders';
+import { ProductsOrderRepositories } from '../repositories/ProductsOrdersRepositories';
 import { OrdersService } from '../services/OrdersService';
 import { ProductsOrderService } from '../services/ProductOrderService';
 import { Router } from 'express';
