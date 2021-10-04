@@ -1,4 +1,4 @@
-import { ProductsOrderRepositories } from "@src/repositories/ProductsOrders";
+import { ProductsOrderRepositories } from "../repositories/ProductsOrdersRepositories";
 
 interface IProducts {
   products_id: number;
@@ -24,9 +24,6 @@ class ProductsOrderService {
       })
       return orderProducts;
     });
-    console.log(order_id);
-    console.log(listOrder);
-
 
     return await this.productOrderRepositories.save(listOrder)
   }
