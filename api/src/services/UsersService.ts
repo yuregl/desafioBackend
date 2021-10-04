@@ -29,9 +29,7 @@ class UsersService {
       isAdmin
     });
 
-    await this.usersRepositories.save(user);
-
-    return user;
+    return await this.usersRepositories.save(user);
   }
 
   async executeLogin(req: IUser){
