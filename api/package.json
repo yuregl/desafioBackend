@@ -8,6 +8,7 @@
     "lint": " eslint ./src --ext .ts",
     "lint:fix": "eslint ./src --ext .ts --fix",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "seed:run": "ts-node-dev ./src/database/seed/CreateSeed.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Yure Galdino Lopes",

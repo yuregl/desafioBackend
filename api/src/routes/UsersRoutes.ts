@@ -13,7 +13,7 @@ function createUsersRoutes(){
   const usersService = new UsersService(usersRepositories);
   const usersController = new UserController(usersService);
 
-  routesUser.post('/create_user', hashPassword ,usersController.handleCreateUser);
+  routesUser.post('/user', hashPassword ,usersController.handleCreateUser);
   routesUser.post('/login', usersController.handleLogin);
 
   return routesUser;

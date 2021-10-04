@@ -6,13 +6,14 @@ import { comparePassword } from '../util/EncryptPassWord';
 interface IUser {
   email: string;
   senha: string;
+  isAdmin?: boolean;
 }
 
 class UsersService {
   constructor(private usersRepositories: UsersRepositories){}
 
   async executeCreateUser(req: IUser){
-    const { email, senha } = req;
+    const { email, senha, isAdmin } = req;
     
     const userAlreadyExist = await this.usersRepositories.findOne({
       email,
@@ -24,8 +25,9 @@ class UsersService {
 
     const user = this.usersRepositories.create({
       email,
-      senha
-    })
+      senha,
+      isAdmin
+    });
 
     await this.usersRepositories.save(user);
 

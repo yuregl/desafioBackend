@@ -16,6 +16,12 @@ export class CreateTableUser1633201628676 implements MigrationInterface {
               type: 'varchar',
             },
             {
+              name: 'isAdmin',
+              type: 'boolean',
+              default: false,
+              isNullable: false,
+            },
+            {
               name: 'id',
               type: 'int',
               isPrimary: true,

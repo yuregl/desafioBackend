@@ -10,6 +10,9 @@ class Users {
 
   @Column()
   senha: string;
+
+  @Column()
+  isAdmin: boolean;
 }
 
 export { Users }
