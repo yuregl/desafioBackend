@@ -1,4 +1,4 @@
-import { OrdersRepositories } from "@src/repositories/OrderRespositories";
+import { OrdersRepositories } from "../repositories/OrderRespositories";
 
 interface IOrder {
   note?: string;
@@ -11,9 +11,6 @@ class OrdersService {
 
   async executeCreateOrder(req: IOrder) {
     const { note, user_id, price_total } = req;
-    if(!user_id || !price_total ){
-      throw new Error('Paramêtros inválidos')
-    }
 
     const order = this.orderRepositories.create({
       note,
