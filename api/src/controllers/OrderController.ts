@@ -43,8 +43,6 @@ class OrderController {
       order_id: id, card_number
     });
 
-    console.log(transactions)
-
     return response.status(200).json({
       order,
       productsOrder,
