@@ -1,11 +1,9 @@
 import bcrypt from 'bcrypt';
 import { Request, Response, NextFunction } from 'express'
 
-export async function hashPassword(request: Request, response: Response, next: NextFunction){
-  const { senha } = request.body;
+export async function hashPassword(senha: string){
   const salt = parseInt(<string>process.env.SALT);
-  request.password = await bcrypt.hash(senha, salt);
-  next();
+  return await bcrypt.hash(senha, salt);
 }
 
 export async function comparePassword(password: string, hashedPassword: string): Promise<boolean>{
