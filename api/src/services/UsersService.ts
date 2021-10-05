@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 
+import { hashPassword } from '../util/EncryptPassWord'; 
 import { UsersRepositories } from '../repositories/UsersRepositories';
 import { comparePassword } from '../util/EncryptPassWord';
 
@@ -25,7 +26,7 @@ class UsersService {
 
     const user = this.usersRepositories.create({
       email,
-      senha,
+      senha: await hashPassword(senha),
       isAdmin
     });
 
