@@ -6,6 +6,8 @@ import { ProductsOrderService } from '../services/ProductOrderService';
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 import verifyAuth from '../util/AuthMiddlewae';
+import validation from '../middleware/Validation';
+import { ValidatorOrderCreate } from '../Validators';
 
 const routesOrder = Router();
 
@@ -18,7 +20,7 @@ function createOrderRoutes() {
 
   const productsController = new OrderController(orderService, productsOrderService)
 
-  routesOrder.post('/order', verifyAuth ,productsController.handleCreateOrder);
+  routesOrder.post('/order/new', validation(ValidatorOrderCreate) ,verifyAuth ,productsController.handleCreateOrder);
   return routesOrder;
 }
 
