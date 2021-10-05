@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsArray,IsInt, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsArray,IsInt, IsNumber, Length } from 'class-validator';
 import { Trim } from 'class-sanitizer';
 
 export class ValidatorOrderCreate{
@@ -17,5 +17,12 @@ export class ValidatorOrderCreate{
 
   @IsNotEmpty()
   @IsArray()
-  public products: object[];  
+  public products: object[];
+
+  @IsString()
+  @IsNotEmpty()
+  // @IsCreditCard()
+  @Trim()
+  @Length(16,16)
+  public card_number: string;
 }
