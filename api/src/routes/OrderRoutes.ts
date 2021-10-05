@@ -8,6 +8,8 @@ import { getCustomRepository } from 'typeorm';
 import verifyAuth from '../util/AuthMiddlewae';
 import validation from '../middleware/Validation';
 import { ValidatorOrderCreate } from '../Validators';
+import { TransactionsRepositories } from '../repositories/TransactionsRepositories';
+import { TransactionsService } from '../services/TransactionsService';
 
 const routesOrder = Router();
 
@@ -18,7 +20,14 @@ function createOrderRoutes() {
   const productsOrderRepositories =  getCustomRepository(ProductsOrderRepositories);
   const productsOrderService =  new ProductsOrderService(productsOrderRepositories);
 
-  const productsController = new OrderController(orderService, productsOrderService)
+  const transactionsRepositories = getCustomRepository(TransactionsRepositories);
+  const transactionsService = new TransactionsService(transactionsRepositories);
+
+  const productsController = new OrderController(
+    orderService,
+    productsOrderService,
+    transactionsService 
+  )
 
   routesOrder.post('/order/new', validation(ValidatorOrderCreate) ,verifyAuth ,productsController.handleCreateOrder);
   return routesOrder;
