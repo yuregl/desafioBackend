@@ -29,7 +29,7 @@ describe('Users Service', () => {
   
     const req = {
       email: 'teste@teste.com',
-      senha: await bcrypt.hash('senha', 2),
+      senha: 'senha',
       isAdmin: false
     };
 
