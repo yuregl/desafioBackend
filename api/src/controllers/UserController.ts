@@ -5,10 +5,10 @@ class UserController {
   constructor(private userService: UsersService){}
 
   handleCreateUser = async(request: Request, response: Response) => {
-    const { email, isAdmin = false } = request.body;
+    const { email, senha ,isAdmin = false } = request.body;
 
     const user = await this.userService.executeCreateUser({
-      email, senha: request.password, isAdmin
+      email, senha, isAdmin
     });
     return response.json(user);
   }
