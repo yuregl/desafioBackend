@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsNumber, IsDecimal } from 'class-validator';
+import { IsString, IsNotEmpty, IsDecimal } from 'class-validator';
 import { Trim } from 'class-sanitizer';
 
 export class ValidatorProductCreate{
