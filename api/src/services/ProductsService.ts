@@ -11,7 +11,7 @@ class ProductsService {
   constructor(private productsRespositories: ProductsRepositories){}
 
   async executelistProducts() {
-    const products = this.productsRespositories.find();
+    const products = await this.productsRespositories.find();
     return products;
   }
 
