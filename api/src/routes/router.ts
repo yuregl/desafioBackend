@@ -6,6 +6,7 @@ import 'express-async-errors';
 import { createProductsRouter } from './ProductsRoutes';
 import { createUsersRoutes } from './UsersRoutes';
 import { createOrderRoutes } from './OrderRoutes';
+import { createTransactionsRoutes } from './TransactionsRoute';
 
 async function exportApp(){
   const app = express(); 
@@ -15,6 +16,7 @@ async function exportApp(){
   app.use(createProductsRouter());
   app.use(createUsersRoutes());
   app.use(createOrderRoutes());
+  app.use(createTransactionsRoutes());
   app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
     if(err instanceof Error){
       return response.status(400).json({
