@@ -1,3 +1,3 @@
 # Desafio backend
 
-A api tem o intuito de representar o backdend de uma loja, onde ela tem um conjunto de rotas para gerencia de vendas de prondutos.
+Esta API tem o objetivo de gerenciar um conjunto de rotas presentes em uma loja de venda de produtos.
