@@ -14,7 +14,7 @@ Este projeto está estruturado com base no padrão aquitetônico MVC. Todos os a
 
 ## Problemas encontrados
 
-A API do MySQL para NodeJS não atualizou a forma de autenticação para o banco de dados em sua versão 8.X. O TypeORM busca utilizar a autenticação através de SHA256_PASSWORD, porém, na nova versão, o padrão mudou para SHA2_PASSORD. Dessa forma, é necessário fazer um pequeno `work arround` dentro do container para que o serviço funcione adequadamente. Assim que necessário será colocado a demostração dos comandos necesserários para rodar a aplicação.
+A API do MySQL para NodeJS não atualizou a forma de autenticação para o banco de dados em sua versão 8.X. O TypeORM busca utilizar a autenticação através de SHA256_PASSWORD, porém, na nova versão, o padrão mudou para SHA2_PASSWORD. Dessa forma, é necessário fazer um pequeno `work around` dentro do container para que o serviço funcione adequadamente. Assim que necessário será colocado a demostração dos comandos necesserários para rodar a aplicação.
 
 ## Variavéis de ambiente
 
@@ -39,7 +39,7 @@ A API do MySQL para NodeJS não atualizou a forma de autenticação para o banco
 - TYPEORM_MIGRATIONS="./src/database/migrations/\*.ts"
   - Local onde as migrations estão localizadas
 - TYPEORM_MIGRATIONS_DIR="./src/database/migrations"
-  - Diretório
+  - Diretório onde esta localizadas as migrations
 - FOLDER_IMAGE="./src/util/image"
   - Diretório onde as imagens estão sendo salvas
 - SALT=10
@@ -57,13 +57,13 @@ A API do MySQL para NodeJS não atualizou a forma de autenticação para o banco
 
 [Login](./src/docs/login.md)
 
-[Criar Pedito](./src/docs/create_order.md)
+[Criar Pedido](./src/docs/create_order.md)
 
 [Listar todas as transações](./src/docs/get_all_transactions.md)
 
 ## Instalação com docker no Linux
 
-1. Instalar o docker `docker-compose`.
+1. Instale o `docker` e o `docker-compose`.
 2. clone este repositório:
 
    ```shell
@@ -86,7 +86,7 @@ A API do MySQL para NodeJS não atualizou a forma de autenticação para o banco
 
 5. Como foi comentado nos problemas encontrados, existe um problema com a autenticação.
 
-- É Necessário deixar os containers funcionado para acessa o container do banco:
+- Ao rodar o docker-compose up, vai ser gerado um error: Error: ER_NOT_SUPPORTED_AUTH_MODE. É necessário deixa o container do banco funcionado para fazer as alterarçõs necessárias, para que assim possa ser aplicado os comandos dentro do container mysql. Deve ser feito:
   ```shell
     sudo docker exec -it mysql_api bash
   ```
@@ -159,7 +159,7 @@ A API do MySQL para NodeJS não atualizou a forma de autenticação para o banco
 
 4. Como foi comentado nos problemas encontrados, existe um problema com a autenticação.
 
-- É necessário acessar o mysql com o root:
+- Ao tentar acessar o banco vai gerar o error: ER_NOT_SUPPORTED_AUTH_MODE. Assim sendo necessário fazer ajuste para que possa ter a concexão com o banco, aplicado os comandos dentro do container mysql. Deve ser feito:
   ```shell
     mysql -u root -p
   ```
