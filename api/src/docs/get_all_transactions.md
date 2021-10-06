@@ -1,4 +1,4 @@
-# Busca todas as transições
+# Busca todas as transações
 
 Retorna os dados das transações
 
