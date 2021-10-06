@@ -14,10 +14,10 @@ import { TransactionsService } from '../services/TransactionsService';
 const routesOrder = Router();
 
 function createOrderRoutes() {
-  const orderRepositories =  getCustomRepository(OrdersRepositories);
+  const orderRepositories = getCustomRepository(OrdersRepositories);
   const orderService = new OrdersService(orderRepositories);
 
-  const productsOrderRepositories =  getCustomRepository(ProductsOrderRepositories);
+  const productsOrderRepositories = getCustomRepository(ProductsOrderRepositories);
   const productsOrderService =  new ProductsOrderService(productsOrderRepositories);
 
   const transactionsRepositories = getCustomRepository(TransactionsRepositories);
