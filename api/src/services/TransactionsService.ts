@@ -10,7 +10,6 @@ class TransactionsService {
   
   async executeCreateTransactions(req: ITransactions) {
     const { card_number, order_id } = req;
-    console.log(req)
 
     const transactions = this.transactionsRepositories.create({
       card_number,
@@ -18,6 +17,11 @@ class TransactionsService {
     });
 
     return this.transactionsRepositories.save(transactions)
+  }
+
+  async executeGetAllTranscations() {
+    const transactions = await this.transactionsRepositories.find({relations:['order']});
+    return transactions;
   }
 }
 
