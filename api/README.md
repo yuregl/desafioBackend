@@ -200,7 +200,3 @@ A API do MySQL para NodeJS não atualizou a forma de autenticação para o banco
    ```
 
 7. Para acessar o serviço `http://localhost:${PORT_SERVER}`.
-
-### Exemplos de dados
-
-Caso esteja usando o insomnia, na raiz da pasta api tem uma importação das requisições
