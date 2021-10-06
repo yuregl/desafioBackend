@@ -67,7 +67,7 @@ A API do MySQL para NodeJS não atualizou a forma de autenticação para o banco
 2. clone este repositório:
 
 ```shell
-git clone
+git clone https://github.com/yuregl/desafioBackend.git
 cd desafiobackend/api
 ```
 
@@ -135,7 +135,7 @@ docker-compose up -d
 1. Clone este repósitorio:
 
 ```shell
- git clone
+ git clone https://github.com/yuregl/desafioBackend.git
  cd desafiobackend/api
 ```
 
@@ -152,16 +152,33 @@ vi .env
   yarn
 ```
 
-4. Rodar o serviço
+4. Como foi comentado nos problemas encontrados, existe um problema com a autenticação.
+
+- É necessário acessar o mysql com o root:
+  ```shell
+    mysql -u root -p
+  ```
+- Colocar a senha selecionada do .env
+- Fazer um alteração no usuário e colocar a senha do .env no password:
+  ```shell
+    ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+  ```
+- Logo após usar o comando para ajustar as alterações
+
+  ```shell
+    flush privileges;
+  ```
+
+5. Rodar o serviço
 
 ```
   yarn start
 ```
 
-5. Testes
+6. Testes
 
 ```
   yarn test
 ```
 
-6. Para acessar o serviço `http://localhost:${PORT_SERVER}`.
+7. Para acessar o serviço `http://localhost:${PORT_SERVER}`.
