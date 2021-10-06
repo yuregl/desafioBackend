@@ -14,7 +14,7 @@ function createUsersRoutes(){
   const usersService = new UsersService(usersRepositories);
   const usersController = new UserController(usersService);
 
-  routesUser.post('/user/new', validation(ValidatorUserCreate) ,usersController.handleCreateUser);
+  routesUser.post('/users/new', validation(ValidatorUserCreate) ,usersController.handleCreateUser);
   routesUser.post('/login', validation(ValidatorUserLogin), usersController.handleLogin);
 
   return routesUser;

@@ -10,7 +10,12 @@ class UserController {
     const user = await this.userService.executeCreateUser({
       email, senha, isAdmin
     });
-    return response.json(user);
+    
+    if(user.email){
+      return response.status(201).json({message: 'Criado com sucesso'})
+    } else {
+      return response.status(500).json({message: 'Internal Server Error'})
+    }
   }
 
   handleLogin = async(request: Request, response: Response) => {
