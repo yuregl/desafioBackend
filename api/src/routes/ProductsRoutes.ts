@@ -7,6 +7,7 @@ import multer from 'multer';
 import verifyAuth from '../util/AuthMiddlewae';
 import validation from '../middleware/Validation';
 import { ValidatorProductCreate } from '../Validators';
+import { isAdmin } from '../util/verifyAdmin';
 
 import saveImage from '../util/saveImage';
 
@@ -19,7 +20,7 @@ function createProductsRouter(){
 
   routesProducts.get('/products', verifyAuth ,productsController.handleListProducts);
   routesProducts.post('/products/new',
-    multer(saveImage()).single('media'),
+    multer(saveImage()).single('media'), isAdmin,
     validation(ValidatorProductCreate) ,
     productsController.handleCreateProduct);
 
