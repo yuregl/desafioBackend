@@ -116,6 +116,11 @@ A API do MySQL para NodeJS não atualizou a forma de autenticação para o banco
     yarn typeorm migrations:run
     yarn seed:run
   ```
+- Email e senha do admin criado através do seed:
+  ```shell
+    email: teste@admin.com
+    senha: teste1
+  ```
 
 6. Testes
 
@@ -169,6 +174,19 @@ A API do MySQL para NodeJS não atualizou a forma de autenticação para o banco
     flush privileges;
   ```
 
+- Comandos para rodar as migrations e o seed:
+
+  ```shell
+    yarn typeorm migrations:run
+    yarn seed:run
+  ```
+
+- Email e senha do admin criado através do seed:
+  ```shell
+    email: teste@admin.com
+    senha: teste1
+  ```
+
 5. Rode o serviço
 
    ```
@@ -182,3 +200,7 @@ A API do MySQL para NodeJS não atualizou a forma de autenticação para o banco
    ```
 
 7. Para acessar o serviço `http://localhost:${PORT_SERVER}`.
+
+### Exemplos de dados
+
+Caso esteja usando o insomnia, na raiz da pasta api tem uma importação das requisições
