@@ -85,6 +85,14 @@ describe('Transactios Service', () => {
 
     const result = await transactionsService.executeCreateTransactions(req);
 
-    console.log(result);
+    expect(result.id).toBe(1);
+  })
+
+  it('should list transactions', async() => {
+    const transactionsRepository = getCustomRepository(TransactionsRepositories);
+    const transactionsService = new TransactionsService(transactionsRepository);
+    const result = await transactionsService.executeGetAllTranscations();
+
+    expect(result.length).toBe(1);
   })
 });
