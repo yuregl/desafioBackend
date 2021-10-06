@@ -1,4 +1,4 @@
-version: "3.4"
+version: "2.1"
 
 services:
   api:
@@ -6,13 +6,29 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: api_service
-    command: yarn dev
+    command: bash -c "yarn dev"
     ports:
       - ${PORT}:${PORT}
     depends_on:
-      - database
+      database:
+        condition: service_healthy
+    environment:
+      - TYPEORM_CONNECTION=$TYPEORM_CONNECTION
+      - TYPEORM_HOST=$TYPEORM_HOST
+      - TYPEORM_USERNAME=$TYPEORM_USERNAME
+      - TYPEORM_PASSWORD=$TYPEORM_PASSWORD
+      - TYPEORM_DATABASE=$TYPEORM_DATABASE
+      - TYPEORM_PORT=$TYPEORM_PORT
+      - TYPEORM_LOGGING=$TYPEORM_LOGGING
+      - TYPEORM_ENTITIES=$TYPEORM_ENTITIES
+      - TYPEORM_MIGRATIONS=$TYPEORM_MIGRATIONS
+      - TYPEORM_MIGRATIONS_DIR=$TYPEORM_MIGRATIONS_DIR
+    stdin_open: true
+    restart: on-failure
     volumes:
       - ".:/app"
+    networks:
+      rede:
 
   database:
     image: mysql
@@ -20,10 +36,18 @@ services:
       - SYS_NICE
     container_name: mysql_api
     ports:
-      - "3308:3306"
+      - "3308:$TYPEORM_PORT"
     environment:
-      MYSQL_DATABASE: "db"
-      MYSQL_ROOT_PASSWORD: "senha"
-      MYSQL_USER: "user"
-      MYSQL_PASSWORD: "user"
+      MYSQL_DATABASE: $TYPEORM_DATABASE
+      MYSQL_ROOT_PASSWORD: $TYPEORM_PASSWORD
       TZ: "America/Sao_Paulo"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    networks:
+      rede:
+
+networks:
+  rede:
+    driver: bridge
