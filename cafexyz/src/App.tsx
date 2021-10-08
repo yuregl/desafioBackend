@@ -1,16 +1,18 @@
 import { BrowserRouter, Route } from 'react-router-dom';
-
-import { Home } from './pages/Home';
+import { ToastContainer } from 'react-toastify';
+import { Login } from './pages/Login';
 import { CreateAccount } from "./pages/CreateAccount";
+
+import 'react-toastify/dist/ReactToastify.css'; 
 
 
 function App() {
   return (
-
-    <BrowserRouter>
-      <Route path="/" exact component={Home} />
-      <Route path="/account/new" component={CreateAccount} />
-    </BrowserRouter>
+      <BrowserRouter>
+        <Route path="/" exact component={Login} />
+        <Route path="/account/new" component={CreateAccount} />
+        <ToastContainer />
+      </BrowserRouter>
   );
 }
 
