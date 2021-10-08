@@ -1,21 +1,57 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Button } from '../components/Button';
+import axios ,{  AxiosError } from 'axios';
+import { validInputs } from '../utils/validInputs';
 import '../styles/createAccount.scss'
 
 import api from '../api/api';
+
+interface IClientError {
+  error: string;
+}
 
 export function CreateAccount() {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  async function createAccount(event: React.FormEvent<HTMLInputElement>) {
-    event.preventDefault();
-    const result =  await api.post("user/new", { email, senha });
-    console.log(result);
-    history.push('/')
+  function handleAxiosError(err: AxiosError<IClientError>): string | undefined {
+    return err?.response?.data?.error;
   }
+
+  async function createAccount(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    try{
+      const result = validInputs({ email, senha });
+      console.log(result)
+      if(result) {
+        await api.post("users/new", { email, senha });
+        toast.success('Criado com sucesso', {
+          position: 'top-center',
+          autoClose: 5000,
+        });
+        history.push('/')
+      } else {
+        toast.error('Entradas inválidas', {
+          position: 'top-center',
+          autoClose: 5000,
+        });
+      }
+     
+    }catch(err: any| AxiosError){
+      if(axios.isAxiosError(err)){
+        const result = handleAxiosError(err)
+        toast.error(result, {
+          position: 'top-center',
+          autoClose: 5000,
+        });
+      }
+    }
+  }
+
 
   function navigatetoHome() {
     history.push('/');
@@ -26,7 +62,7 @@ export function CreateAccount() {
         <div className="main-content">
           <div id="name-title">Criar Conta</div>
           
-          <form>
+          <form onSubmit={createAccount} >
             <input 
               type="text"
               placeholder="Email"
@@ -34,7 +70,7 @@ export function CreateAccount() {
               value={email}
             />
             <input 
-              type="text"
+              type="password"
               placeholder="Senha"
               onChange={(e) =>{setSenha(e.target.value)}}
               value={senha}
@@ -43,7 +79,6 @@ export function CreateAccount() {
             <div id="buttons">
               <Button 
                 type="submit"
-                onClick={() => createAccount }
               >
                 Criar Conta
               </Button>
